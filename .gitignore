@@ -1,0 +1,30 @@
+# PHP dependencies
+/vendor/
+
+# Environment variables
+.env
+
+# Composer lock file
+composer.lock
+
+# PHPUnit
+/phpunit.result.cache
+
+# IDE directories
+/.idea/
+/.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.cache
+*.tmp
+
+# Migration files
+/migrations/*.php
+
+# Other directories or files to ignore
+/node_modules/

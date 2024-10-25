@@ -1,0 +1,60 @@
+Controllers/
+┣ AuthController.php
+┗ SiteController.php
+Core/
+┣ DB/
+┃ ┣ Database.php
+┃ ┗ DbModel.php
+┣ Exception/
+┃ ┣ ForbiddenExeption.php
+┃ ┗ NotFoundException.php
+┣ Form/
+┃ ┣ BaseField.php
+┃ ┣ Form.php
+┃ ┣ InputField.php
+┃ ┣ SubmitButton.php
+┃ ┗ TextAreaField.php
+┣ Middlewares/
+┃ ┣ AuthMiddleware.php
+┃ ┗ BaseMiddleware.php
+┣ .editorconfig
+┣ Application.php
+┣ Controller.php
+┣ functions.php
+┣ Model.php
+┣ Request.php
+┣ Response.php
+┣ Router.php
+┣ Session.php
+┣ UserModel.php
+┗ View.php
+migrations/
+┣ m0001_initial.php
+┗ m0002_add_password_column_to_users_table.php
+Models/
+┣ ContactForm.php
+┣ LoginForm.php
+┗ User.php
+public/
+┗ index.php
+vendor/
+Views/
+┣ auth/
+┃ ┣ login.php
+┃ ┗ register.php
+┣ exceptions/
+┃ ┣ _404.php
+┃ ┗ _error.php
+┣ layouts/
+┃ ┣ auth.php
+┃ ┗ main.php
+┣ userpages/
+┃ ┗ profile.php
+┣ contact.php
+┗ home.php
+.env
+.htaccess
+composer.json
+composer.lock
+Migrations.php
+
