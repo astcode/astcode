@@ -49,9 +49,9 @@ Before installing the AST Code MVC PHP Framework, ensure your system meets the f
 ### Setup Steps
 
 1. **Clone the Repository:**   ```bash
-   git clone https://github.com/yourusername/astcode-mvcframework.git   ```
+   git clone https://github.com/astcode/astcode.git   ```
 2. **Navigate to the Project Directory:**   ```bash
-   cd astcode-mvcframework   ```
+   cd astcode   ```
 3. **Install Dependencies via Composer:**   ```bash
    composer install   ```
 4. **Configure Environment Variables:**
@@ -336,7 +336,7 @@ Contributions are welcome! Please follow these steps to contribute to the AST Co
 
 2. **Clone Your Fork:**
    ```bash
-   git clone https://github.com/yourusername/astcode-mvcframework.git
+   git clone https://github.com/astcode/astcode.git
    ```
 
 3. **Create a Feature Branch:**

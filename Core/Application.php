@@ -61,15 +61,16 @@ class Application
     public function run()
     {
         try {
-            foreach ($this->middlewares as $middleware) {
-                $middleware->execute();
-            }
             echo $this->router->resolve();
+        } catch (\PDOException $e) {
+            $this->response->setStatusCode(500);
+            echo $this->view->renderView('_error', [
+                'exception' => new \Exception('Database error occurred', 500, $e)
+            ]);
         } catch (\Exception $e) {
-            // Convert exception code to an integer HTTP status code
-            $statusCode = is_numeric($e->getCode()) ? (int)$e->getCode() : 500; // Default to 500 if not numeric
-            $this->response->setStatusCode($statusCode);
-            echo $this->view->renderView('exceptions/_error', [
+            $code = is_int($e->getCode()) && $e->getCode() !== 0 ? $e->getCode() : 500;
+            $this->response->setStatusCode($code);
+            echo $this->view->renderView('_error', [
                 'exception' => $e
             ]);
         }
@@ -102,7 +103,6 @@ class Application
 
     public static function isGuest()
     {
-        // dd(!self::$app->user);
         return !self::$app->user;
     }
 

@@ -9,6 +9,7 @@ namespace App\Core;
  */
 class Request
 {
+    private array $routeParams = [];
 
     public function getPath()
     {
@@ -32,6 +33,13 @@ class Request
     public function getBody()
     {
         $body = [];
+
+        if ($this->isJson()) {
+            $json = file_get_contents('php://input');
+            $body = json_decode($json, true) ?? [];
+            return $body;
+        }
+
         if ($this->method() === 'get') {
             foreach ($_GET as $key => $value) {
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -50,8 +58,25 @@ class Request
         return $this->method() === 'post';
     }
 
-    public function isGet()
+    public function isJson()
     {
-        return $this->method() === 'get';
+        $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+        return strpos($contentType, 'application/json') !== false;
+    }
+
+    public function setRouteParams($params)
+    {
+        $this->routeParams = $params;
+        return $this;
+    }
+
+    public function getRouteParams()
+    {
+        return $this->routeParams;
+    }
+
+    public function getRouteParam($param, $default = null)
+    {
+        return $this->routeParams[$param] ?? $default;
     }
 }

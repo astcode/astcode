@@ -35,11 +35,21 @@ $this->title = 'Contact';
                     <div class="col-md-6">
                         <div class="md-form mb-0">
                             <?php echo $form->field($model, 'name')->addOption('success')->placeholder('Enter Your Name...'); ?>
+                            <?php if ($model->hasError('name')): ?>
+                                <div class="invalid-feedback d-block">
+                                    <?php echo $model->getFirstError('name') ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="md-form mb-0">
                             <?php echo $form->field($model, 'email')->placeholder('Enter Your Email Address...'); ?>
+                            <?php if ($model->hasError('email')): ?>
+                                <div class="invalid-feedback d-block">
+                                    <?php echo $model->getFirstError('email') ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -54,12 +64,22 @@ $this->title = 'Contact';
 
                         <div class="md-form">
                             <?php echo $form->field($model, 'subject')->placeholder('Enter Subject...'); ?>
+                            <?php if ($model->hasError('subject')): ?>
+                                <div class="invalid-feedback d-block">
+                                    <?php echo $model->getFirstError('subject') ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="p-2">
                     </div>
                     <div class="md-form">
                         <?php echo $form->textAreaField($model, 'body')->placeholder('Enter Your Message...'); ?>
+                        <?php if ($model->hasError('body')): ?>
+                            <div class="invalid-feedback d-block">
+                                <?php echo $model->getFirstError('body') ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="p-2">
                     </div>

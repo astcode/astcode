@@ -19,9 +19,19 @@ $this->title = 'Login';
                     <?php $form = Form::begin('', 'post'); ?>
                     <div class="mb-3">
                         <?php echo $form->field($model, 'email')->fieldType('email')->placeholder('Enter your Email Address...'); ?>
+                        <?php if ($model->hasError('email')): ?>
+                            <div class="invalid-feedback d-block">
+                                <?php echo $model->getFirstError('email') ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3">
                         <?php echo $form->field($model, 'password')->passwordField()->placeholder('Enter your Password...'); ?>
+                        <?php if ($model->hasError('password')): ?>
+                            <div class="invalid-feedback d-block">
+                                <?php echo $model->getFirstError('password') ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3 form-check">
                         <?php echo $form->checkboxField($model, 'rememberMe', 'Remember Me'); ?>

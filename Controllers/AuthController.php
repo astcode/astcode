@@ -10,24 +10,17 @@ use App\Core\Response;
 use App\Core\Controller;
 use App\Core\Application;
 use App\Models\LoginForm;
-use App\Core\Middlewares\AuthMiddleware;
 
 class AuthController extends Controller
 {
-
-
-    public function __construct()
-    {
-        $this->registerMiddleware(new AuthMiddleware(['profile']));
-    }
-    
-    public function index()
-    {
-        return 'index';
-    }
-
     public function login(Request $request, Response $response)
     {
+        // Redirect if already logged in
+        if (!Application::isGuest()) {
+            $response->redirect('/');
+            return;
+        }
+
         $loginForm = new LoginForm();
         if ($request->isPost()) {
             $loginForm->loadData($request->getBody());
@@ -35,9 +28,6 @@ class AuthController extends Controller
                 $response->redirect('/');
                 return;
             }
-            return $this->render('auth/login', [
-                'model' => $loginForm
-            ]);
         }
         $this->setLayout('auth');
         return $this->render('auth/login', [
@@ -45,21 +35,23 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register($request)
+    public function register(Request $request)
     {
-        $user = new User();
+        // Redirect if already logged in
+        if (!Application::isGuest()) {
+            Application::$app->response->redirect('/');
+            return;
+        }
 
-        if ($request->isPost()) {            
+        $user = new User();
+        if ($request->isPost()) {
             $user->loadData($request->getBody());
-            
+
             if ($user->validate() && $user->save()) {
-                Application::$app->session->setFlash('success', 'Thank you for registering');
+                Application::$app->session->setFlash('success', 'Thanks for registering');
                 Application::$app->response->redirect('/');
+                return 'Show success page';
             }
-            
-            return $this->render('auth/register', [
-                'model' => $user
-            ]);
         }
         $this->setLayout('auth');
         return $this->render('auth/register', [
@@ -67,15 +59,23 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout($request, $response)
+    public function logout(Request $request, Response $response)
     {
-        Application::$app->logout();
-        Application::$app->response->redirect('/');
+        // Only allow logout if logged in
+        if (!Application::isGuest()) {
+            Application::$app->logout();
+            Application::$app->session->setFlash('success', 'You have been logged out');
+        }
+        $response->redirect('/');
     }
     
     public function profile()
     {
-        return $this->render('userpages/profile');
+        // Only allow profile access if logged in
+        if (Application::isGuest()) {
+            Application::$app->response->redirect('/login');
+            return;
+        }
+        return $this->render('profile');
     }
-
 }
