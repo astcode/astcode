@@ -49,14 +49,6 @@ CREATE TABLE `users` (
   `user_group` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `name`, `joined`, `user_group`) VALUES
-(135, 'aaron', 'a053ed1977fa4973068d8d9a0d9054a7d70ad2355267a8ba5f7cf8eb419b6e84', 'j3IfvAf36VWiwTxVBagPZhANs8YdA8LO', 'Aaron Thomas', '2024-09-13 02:25:35', 1),
-(136, 'crm', '67d4914d0ea5f6870757c479e106ffe81acc7ed49c54e5d90d2f9035a94908b9', 'QPU9WrkhDdUqJ0FfgJiTxBI97k56e6gw', 'Aaron', '2024-09-13 02:34:20', 2);
-
 -- --------------------------------------------------------
 
 --
